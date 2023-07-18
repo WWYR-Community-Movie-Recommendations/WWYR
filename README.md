@@ -16,16 +16,16 @@ Provide users with movie recommendations (complete with YouTube trailer, contrib
 
 ### Domain Model (image)
 
-[Domain Model](WWYR/img/DomainModel.jpeg)
+[Domain Model](img/DomainModel.jpeg)
 
 ### WireFrames (images)
 
-[index.html](WWYR/img/index.html.png)  
+[index.html](img/index.html.png)  
 
-[home.html](WWYR/img/Home.html.png)  
+[home.html](img/Home.html.png)  
 
-[communityList.html](WWYR/img/CommunityList.html.png)  
+[communityList.html](img/CommunityList.html.png)  
 
-[recommendMovie.html](WWYR/img/RecommendMovie.html.png)
+[recommendMovie.html](img/RecommendMovie.html.png)
 
-[newUser.html](WWYR/img/NewUser.html.png)
+[newUser.html](img/NewUser.html.png)
