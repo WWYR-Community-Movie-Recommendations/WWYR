@@ -10,5 +10,22 @@ Provide users with movie recommendations (complete with YouTube trailer, contrib
 
 ## Links
 
+### GitHub Project Management Board
+
 [GitHub Project Management Board](https://github.com/orgs/WWYR-Community-Movie-Recommendations/projects/1)  
+
+### Domain Model (image)
+
 [Domain Model](WWYR/img/DomainModel.jpeg)
+
+### WireFrames (images)
+
+[index.html](WWYR/img/index.html.png)  
+
+[home.html](WWYR/img/Home.html.png)  
+
+[communityList.html](WWYR/img/CommunityList.html.png)  
+
+[recommendMovie.html](WWYR/img/RecommendMovie.html.png)
+
+[newUser.html](WWYR/img/NewUser.html.png)
