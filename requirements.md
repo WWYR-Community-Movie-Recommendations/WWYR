@@ -31,13 +31,14 @@ The application will not provide movie recommendations from external sources or 
 **Stretch Goals:**  
 
 1. Implement a rating system, allowing users to rate the movies they have watched.
-2. Enable users to create and manage recommendation playlists, grouping movie suggestions based on themes or genres.  
+2. Enable users to create and manage recommendation playlists, grouping movie suggestions based on themes or genres.
+3. Filter through complete list of movie recommendations by contributor, genre, or keywords.
 
 ## Functional Requirements
 
 1. Users can access the recommendation submission form and input movie details, comments, contributor information, and YouTube trailer links.
 2. The application should generate a random movie recommendation for users upon request, displaying the movie title, YouTube trailer, contributor details, and comments.
-3. Users can explore the complete list of movie recommendations through the dedicated data page, with options to filter by contributor, genre, or keywords.  
+3. Users can explore the complete list of movie recommendations through the dedicated data page.
 
 **Data Flow:**
 
