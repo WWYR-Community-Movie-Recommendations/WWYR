@@ -47,6 +47,12 @@ li {
   border-radius: 10px;
 }
 
+a:hover {
+  font-size: 1.6vw;
+  font-weight: bold;
+  color: #ec242a;
+}
+
 a {
   font-size: 1.5vw;
   font-family: 'Roboto', sans-serif;
@@ -56,11 +62,7 @@ a {
   border: none;
   padding: 2%;
   line-height: 10vh;
-}
-
-.recommend-movie-container {
-  display: flex;
-  flex-direction: column;
+  transition: 350ms;
 }
 
 h1 {
@@ -80,31 +82,6 @@ h2 {
   color: #030303;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
-}
-
-input {
-  font-size: 1.25vw;
-  font-family: 'Roboto', sans-serif;
-  width: 50%;
-  height: 5vh;
-  border-radius: 10px;
-  margin-bottom: 5%;
-  margin-left: 3%;
-  background-color: #E4E4E4A8;
-  border: none;
-}
-
-button {
-  font-size: 1.25vw;
-  font-family: 'Roboto', sans-serif;
-  border-radius: 10px;
-  color: #171a1d;
-  background-color: #e4e4e4a8;
-  padding: 1.5% 0%;
-  width: 50%;
-  border: none;
-  margin-bottom: 5%;
-  margin-left: 3%;
 }
 
 p {

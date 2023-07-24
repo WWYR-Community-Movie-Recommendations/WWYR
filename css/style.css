@@ -83,6 +83,13 @@ input {
   border: none;
 }
 
+button:hover {
+  background-color: #ec242a;
+  font-size: 1.6vw;
+  color: #ffffff;
+  cursor: pointer;
+}
+
 button {
   font-size: 1.5vw;
   font-family: 'Roboto', sans-serif;
@@ -93,6 +100,13 @@ button {
   width: 50%;
   border: none;
   margin-bottom: 5%;
+  transition: 350ms;
+}
+
+a:hover {
+  font-size: 1.6vw;
+  font-weight: bold;
+  color: #ec242a;
 }
 
 a {
@@ -100,4 +114,5 @@ a {
   font-family: 'Roboto', sans-serif;
   text-decoration: none;
   color: #171a1d;
+  transition: 350ms;
 }
