@@ -1,5 +1,4 @@
 html {
-  /* border: 3px solid yellow; */
   height: 100%;
 }
 
@@ -7,11 +6,9 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  /* border: 3px solid green; */
 }
 
 main {
-  /* border: 3px solid red; */
   margin: 0;
   padding: 0;
   width: 100%;
@@ -25,7 +22,6 @@ main {
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   grid-auto-columns: minmax(minimum, maximum);
-  /* border: 3px solid blue; */
 }
 
 .logo-container {
@@ -39,7 +35,6 @@ h1 {
   font-size: 5vw;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
-  /* border: 3px solid purple; */
   margin-top: 5%;
 }
 
@@ -93,7 +88,7 @@ button {
   font-family: 'Roboto', sans-serif;
   border-radius: 10px;
   color: #171a1d;
-  background-color: #E4E4E4A8;
+  background-color: #e4e4e4a8;
   padding: 1.5% 0%;
   width: 50%;
   border: none;
