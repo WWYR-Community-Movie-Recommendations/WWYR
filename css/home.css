@@ -41,14 +41,14 @@ ul {
 
 li {
   background-color: white;
-  margin-top: 37%;
+  margin-top: 30%;
   width: 100%;
   height: 10vh;
   border-radius: 10px;
 }
 
 a {
-  font-size: 2vw;
+  font-size: 1.5vw;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
   color: #171a1d;
