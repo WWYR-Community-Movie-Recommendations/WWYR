@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>Home - WWYR</title>
+</head>
+
+<body>
+
+  <main>
+
+    <div class="grid-container">
+
+      <div class="nav-container">
+        <nav>
+          <ul>
+            <li><a href="recommendMovie.html">Recommend Movie</a></li>
+            <li><a href="communityList.html">Community List</a></li>
+            <li><a href="aboutUs.html">About Us</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="recommendation-container">
+
+        <h1>Random Movie Recommendations</h1>
+        <p id="welcome-user-text">Welcome User! Here is your recommended movie!</p>
+        <div class="video-container">
+          <iframe 
+          class="youtube-videos"
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/kOEDG3j1bjs" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          ></iframe>
+        </div>
+
+        <h2>Title of Film</h2>
+        <p>Comments about film</p>
+        <p>Contributor Name</p>
+        <p id="button-text">Click Button Below for Another Movie Recommendation!</p>
+        <button type="submit">Get Movie!</button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
