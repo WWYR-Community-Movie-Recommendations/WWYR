@@ -28,13 +28,19 @@
 
         <p id="existing-user-text">Welcome to the Community!</p>
 
-        <label for="username"></label>
-        <input type="text" id="username" placeholder="   Create User Name">
+        <form id="userForm">
 
-        <label for="userID"></label>
-        <input type="text" id="userID" placeholder="   Create six-digit user ID">
+          <fieldset>
+            <label for="userName"></label>
+            <input type="text" id="userName" placeholder="   Create User Name" name="userName">
 
-        <button type="submit">Create User</button>
+            <label for="userID"></label>
+            <input type="number" id="userID" placeholder="   Create six-digit user ID" name="userID">
+          </fieldset>
+
+          <button type="submit" id="create-user-btn">Create User</button>
+          
+        </form>
 
         <a href="index.html">Existing User? Click Here</a>
 
@@ -42,7 +48,7 @@
     </div>
 
   </main>
-
+  <script src="js/app.js"></script>
 </body>
 
 </html>
