@@ -28,13 +28,17 @@
 
         <p id="existing-user-text">Welcome Back!</p>
 
-        <label for="username"></label>
-        <input type="text" id="username" placeholder="   Enter User Name">
+        <form id="existingUserForm">
+          <fieldset>
+            <label for="username"></label>
+            <input type="text" id="username" name="userName" placeholder="   Enter User Name">
 
-        <label for="userID"></label>
-        <input type="text" id="userID" placeholder="   Enter User ID">
+            <label for="userID"></label>
+            <input type="text" id="userID" maxlength="4" name="userID" placeholder="   Enter four-digit user ID#">
+          </fieldset>
 
-        <button type="submit" id="submit-button">Submit</button>
+          <button type="submit" id="submit-button">Submit</button>
+        </form>
 
         <a href="newUser.html">New User? Click Here</a>
 
@@ -42,7 +46,7 @@
     </div>
 
   </main>
-
+  <script src="js/index.js"></script>
 </body>
 
 </html>
