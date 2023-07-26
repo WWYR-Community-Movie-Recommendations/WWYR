@@ -24,22 +24,20 @@
 
       </div>
 
-      <div class="existing-user-container">
+      <div class="new-user-container">
 
-        <p id="existing-user-text">Welcome to the Community!</p>
+        <p id="new-user-text">Welcome to the Community!</p>
 
-        <form id="userForm">
-
+        <form id="newUserForm">
           <fieldset>
             <label for="userName"></label>
             <input type="text" id="userName" placeholder="   Create User Name" name="userName">
 
             <label for="userID"></label>
-            <input type="number" id="userID" placeholder="   Create six-digit user ID" name="userID">
+            <input type="text" id="userID" placeholder="   Create four-digit user ID" name="userID" maxlength="4">
           </fieldset>
 
-          <button type="submit" id="create-user-btn">Create User</button>
-          
+          <button type="submit" id="create-user-btn">Create User</button> 
         </form>
 
         <a href="index.html">Existing User? Click Here</a>
