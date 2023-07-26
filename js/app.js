@@ -5,7 +5,8 @@ let userArray = [];
 
 // ***** DOM WINDOWS *****
 // Get user name and user ID from the input fields
-let userForm = document.getElementById('userForm');
+let newUserForm = document.getElementById('newUserForm');
+let userIDInput = document.getElementById('userID');
 
 // ***** CONSTRUCTOR FUNCTION *****
 function User(userName, userID) {
@@ -35,12 +36,27 @@ function storeUsersToLocalStorage(userArray) {
 
 }
 
-// Check if user name taken
-function checkUserNameAvailability(userName) {
+// Check if user name taken regardless of casing used
+function checkUserNameAvailability(userNameCheck) {
+  // Lowercase userNameCheck
+  userNameCheck = userNameCheck.toLowerCase();
 
   // Check if userName matches any userName in userArray
   return userArray.some(function(user) {
-    return user.userName === userName;
+    // Lowercase user names from userArray
+    let lowercaseUserName = user.userName.toLowerCase();
+    // Check if userName equals userNameCheck
+    return lowercaseUserName === userNameCheck;
+  });
+
+}
+
+// Check if user ID taken
+function checkUserIDAvailability(userIDCheck) {
+
+  // Check is userID matches any userID in userArray
+  return userArray.some(function(user) {
+    return user.userID === userIDCheck;
   });
 
 }
@@ -50,29 +66,43 @@ function handleCreateUser (event) {
   event.preventDefault();
 
   // Retrieve values from user form (html)
-  let userName = event.target.userName.value;
-  let userID = event.target.userID.value;
+  let userNameNew = event.target.userName.value;
+  let userIDNew = event.target.userID.value;
 
   // Check if the username already exists in the userArray
-  let usernameExists = checkUserNameAvailability(userName);
+  let usernameExists = checkUserNameAvailability(userNameNew);
+
+  // Check if userID already exists in userArray
+  let userIDExists = checkUserIDAvailability(userIDNew);
 
   // If username already exists pop up alert, reset form
-  if (usernameExists) {
+  if (usernameExists || userIDExists) {
     // Username is already taken, display an alert
-    alert('Username already taken. Please choose a different username.');
+    alert('Username or UserID already taken. Please choose a different username or ID.');
     // Reset the form
     event.target.reset();
     return; // Stop execution, do not create a new user
   }
 
   // Create a new User object
-  createUser(userName, userID);
+  createUser(userNameNew, userIDNew);
 
   // Store new user to local storage
   storeUsersToLocalStorage(userArray);
 
   // Redirect to index.html to sign in as existing user
   window.location.href = 'index.html';
+}
+
+function handleIDInput() {
+  // Get current value of the ID input
+  let inputValue = userIDInput.value;
+
+  // Check if the value is numeric
+  if (isNaN(inputValue)) {
+    // If not numeric don't allow typing
+    userIDInput.value = '';
+  }
 }
 
 // ***** EXECUTABLE CODE *****
@@ -83,7 +113,12 @@ let existingUsers = JSON.parse(localStorage.getItem('users')) || [];
 
 // Restore userArray with data from local storage (if any)
 userArray = existingUsers;
+console.log(userArray);
 
 // ***** User Adds Info, Check Made if userName Exists, Once User Created Direct to Existing User Page (index.html) *****
-// Add event listener to form 'userForm'
-userForm.addEventListener('submit', handleCreateUser);
+
+// Add listener to limit user ID to four digits only and ensure numeric value only
+userIDInput.addEventListener('input', handleIDInput);
+
+// Add event listener to form 'userForm' where user enters info
+newUserForm.addEventListener('submit', handleCreateUser);
