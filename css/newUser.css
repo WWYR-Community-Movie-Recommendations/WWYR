@@ -55,7 +55,7 @@ img {
   margin-top: 3%;
 }
 
-.existing-user-container {
+.new-user-container {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -63,7 +63,7 @@ img {
   justify-content: flex-start;
 }
 
-#existing-user-text {
+#new-user-text {
   color: #030303;
   font-size: 3vw;
   font-family: 'Roboto', sans-serif;
