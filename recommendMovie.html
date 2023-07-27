@@ -32,26 +32,32 @@
 
         <h1>Share Your Movie Recommendation</h1>
 
-        <h2>Let the Community Discover Your Pick!</h2>
+        <h2 id="user-greeting"></h2>
 
-        <label for="username"></label>
-        <input type="text" id="username" placeholder="   Enter Name of Movie">
+        <form id="share-movie-form">
 
-        <label for="userID"></label>
-        <input type="text" id="userID" placeholder="   Enter Movie Comment">
+          <fieldset>
+            <label for="movieName"></label>
+            <input type="text" id="movie-name" name="movieName" placeholder="   Enter Name of Movie">
 
-        <label for="videoLink"></label>
-        <input type="text" id="videoLink" placeholder="   Enter movie trailer url">
+            <label for="userComment"></label>
+            <input type="text" id="user-comment" name="userComment" placeholder="   Enter Movie Comment">
 
-        <label for="userID"></label>
-        <input type="text" id="videoLink" placeholder="   Enter user ID#">
+            <label for="videoLink"></label>
+            <input type="text" id="video-link" name="videoLink" placeholder="   Enter movie trailer url">
 
-        <button type="submit">Submit</button>
+            <label for="userID"></label>
+            <input type="text" id="user-ID" maxlength="4" name="userID" placeholder="   Enter user ID#">
+          </fieldset>
+
+          <button type="submit">Share Recommendation</button>
+
+        </form>
 
       </div>
 
     </div>
 
   </main>
-
+  <script src="js/recommendMovie.js"></script>
 </body>
