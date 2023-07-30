@@ -26,6 +26,19 @@ function MovieData (movieName, userComment, videoLink, userName) {
 
 
 // ***** HELPER FUNCTIONS / UTILITIES *****
+
+// Function to check local storage and load user data and userArray
+function loadUserData() {
+  // Retrieve existing user data from local storage (if any) and convert into usable JavaScript data, if no data establish empty array
+  let existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Restore userArray with data from local storage (if any)
+  userArray = existingUsers;
+
+  // Retrieve current user name from local storage
+  userNameLocalStorage = localStorage.getItem('userName');
+}
+
 // Update the content of the h2 element with the greeting message
 function renderGreeting() {
   userGreeting.textContent = `${userNameLocalStorage} Let the Community Discover Your Pick!`;
@@ -150,18 +163,12 @@ function handleSubmit(event) {
 
 // ***** EXECUTABLE CODE *****
 
-// Retrieve current user name from local storage
-userNameLocalStorage = localStorage.getItem('userName');
+// Load existing user data and userArray
+loadUserData();
+console.log(userArray);
 
 // Render greeting to current user
 renderGreeting();
-
-// ***** Check Local Storage and Load into userArray If Any *****
-// Retrieve existing user data from local storage (if any) and convert into usable JavaScript data, if no data establish empty array
-let existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-
-// Restore userArray with data from local storage (if any)
-userArray = existingUsers;
 
 // Add listener to limit user ID to four digits only and ensure numeric value only
 userIDInput.addEventListener('input', handleIDInput);
