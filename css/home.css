@@ -83,10 +83,10 @@ h1 {
 p {
   margin-left: 3%;
   color: #030303;
-  font-size: 1vw;
+  font-size: 1.25vw;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
-  margin-top: 1%; 
+  margin-top: 2%; 
 }
 
 h2 {
@@ -125,7 +125,7 @@ h2 {
 }
 
 #button-text {
-  margin-top: 5%;
+  margin-top: 4%;
   font-size: 1.25vw;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
