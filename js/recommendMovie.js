@@ -17,10 +17,11 @@ let movieCommentInput = document.getElementById('user-comment');
 
 // ***** CONSTRUCTOR FUNCTION *****
 // Create movie objects
-function MovieData (movieName, userComment, videoLink) {
+function MovieData (movieName, userComment, videoLink, userName) {
   this.movieName = movieName;
   this.userComment = userComment;
   this.videoLink = videoLink;
+  this.userName = userName;
 }
 
 
@@ -134,7 +135,7 @@ function handleSubmit(event) {
   }
 
   // If everything valid/correct, push movie data object to userArray.recommended movies[]
-  let userMovieData = new MovieData(movieNameValue, userCommentValue,videoLinkValue);
+  let userMovieData = new MovieData(movieNameValue, userCommentValue,videoLinkValue,userNameLocalStorage);
   userArray[userIndex].recommendedMovies.push(userMovieData);
 
   // Update local storage with the new movie data
