@@ -3,10 +3,11 @@
 // ***** GLOBALS *****
 let userArray = [];
 
+
 // ***** DOM WINDOWS *****
-// Get user name and user ID from the input fields
 let newUserForm = document.getElementById('newUserForm');
 let userIDInput = document.getElementById('userID');
+
 
 // ***** CONSTRUCTOR FUNCTION *****
 function User(userName, userID) {
@@ -14,6 +15,7 @@ function User(userName, userID) {
   this.userID = userID;
   this.recommendedMovies = []; // array to store recommended movies
 }
+
 
 // ***** HELPER FUNCTIONS / UTILITIES *****
 
@@ -23,6 +25,7 @@ function createUser(name, userID) {
   userArray.push(new User(name, userID));
 
 }
+
 
 // Update userArray and store to local storage
 function storeUsersToLocalStorage(userArray) {
@@ -36,8 +39,22 @@ function storeUsersToLocalStorage(userArray) {
 
 }
 
+
+// Check local storage and load user data and userArray
+function loadUserData() {
+
+  // Retrieve existing user data from local storage (if any) and convert into usable JavaScript data, if no data establish empty array
+  let existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Restore userArray with data from local storage (if any)
+  userArray = existingUsers;
+
+}
+
+
 // Check if user name taken regardless of casing used
 function checkUserNameAvailability(userNameCheck) {
+
   // Lowercase userNameCheck
   userNameCheck = userNameCheck.toLowerCase();
 
@@ -51,6 +68,7 @@ function checkUserNameAvailability(userNameCheck) {
 
 }
 
+
 // Check if user ID taken
 function checkUserIDAvailability(userIDCheck) {
 
@@ -61,8 +79,12 @@ function checkUserIDAvailability(userIDCheck) {
 
 }
 
+
 // ***** EVENT HANDLERS *****
+
+// Events when new user presses 'Create User' button
 function handleCreateUser (event) {
+
   event.preventDefault();
 
   // Retrieve values from user form (html)
@@ -92,9 +114,13 @@ function handleCreateUser (event) {
 
   // Redirect to index.html to sign in as existing user
   window.location.href = 'index.html';
+
 }
 
+
+// Limit user ID to four digits only and ensure numeric value only
 function handleIDInput() {
+
   // Get current value of the ID input
   let inputValue = userIDInput.value;
 
@@ -103,22 +129,15 @@ function handleIDInput() {
     // If not numeric don't allow typing
     userIDInput.value = '';
   }
+
 }
+
 
 // ***** EXECUTABLE CODE *****
 
-// ***** Check Local Storage and Load into userArray If Any *****
-// Retrieve existing user data from local storage (if any) and convert into usable JavaScript data, if no data establish empty array
-let existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+loadUserData();
 
-// Restore userArray with data from local storage (if any)
-userArray = existingUsers;
-console.log(userArray);
-
-// ***** User Adds Info, Check Made if userName Exists, Once User Created Direct to Existing User Page (index.html) *****
-
-// Add listener to limit user ID to four digits only and ensure numeric value only
 userIDInput.addEventListener('input', handleIDInput);
 
-// Add event listener to form 'userForm' where user enters info
+// Add event listener to form 'userForm' where new user enters info
 newUserForm.addEventListener('submit', handleCreateUser);
