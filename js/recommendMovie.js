@@ -39,51 +39,79 @@ function loadUserData() {
   userNameLocalStorage = localStorage.getItem('userName');
 }
 
+
 // Update the content of the h2 element with the greeting message
 function renderGreeting() {
   userGreeting.textContent = `${userNameLocalStorage} Let the Community Discover Your Pick!`;
 }
 
+
 // Find the index of a user in userArray based on userName and userID
 // Returns number of index if found, returns -1 if match not found
 function findUserIndex(userName, userID) {
+
   return userArray.findIndex(function(user) {
+
     return user.userName === userName && user.userID === userID;
+
   });
+
 }
+
 
 // Check if movie URL matches URL matches previously submitted movie url
 function findMovieURL(videoLink) {
+
   return userArray.find(function(user) {
-    return user.recommendedMovies.some(function (movie) {
+
+    return user.recommendedMovies.some(function(movie) {
+
       return movie.videoLink === videoLink;
+
     });
+
   });
+
 }
 
-// Check if movie name matches previously submitted movie name
+
+// Check if movie name matches previously submitted movie name regardless of letter casing
 function findMovieTitle(movieName) {
+
+  // Lowercase moviename
   let movieNameLowerCase = movieName.toLowerCase();
 
   return userArray.find(function(user) {
+
     return user.recommendedMovies.some(function (movie) {
+
+      // Lowercase movieName from userArray
       return movie.movieName.toLowerCase() === movieNameLowerCase;
+
     });
+
   });
+
 }
+
 
 // Check if movie trailer is a valid YouTube link
 function isValidYouTubeURL(url) {
+
   // Regular expression to match the YouTube URL pattern
   let youtubeURLRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
 
   // Test the URL against the regex pattern
   return youtubeURLRegex.test(url);
+
 }
 
 
 // ***** EVENT HANDLERS *****
+
+// Limit user ID to four digits only and ensure numeric value only
 function handleIDInput() {
+
   // Get current value of the ID input
   let inputValue = userIDInput.value;
 
@@ -92,9 +120,13 @@ function handleIDInput() {
     // If not numeric don't allow typing
     userIDInput.value = '';
   }
+
 }
 
+
+// Events when user presses 'share movie', pushes data into userArray
 function handleSubmit(event) {
+
   event.preventDefault();
 
   // Retrieve values from user form (html)
@@ -125,24 +157,32 @@ function handleSubmit(event) {
 
   // If userIndex equals -1, no matching userName and userID were found in local storage
   if (userIndex === -1) {
+
     alert('Invalid user ID entered. Please check your input and enter your ID number');
+
+    // Clear ID field
     userIDInput.value ='';
+
     return;
   }
 
   // Check if movie name or movie link have been sumbitted previously by another user
   if (findMovieName !== undefined || findMovieLink !== undefined) {
+
     alert('Movie name has already been shared by someone in your community! Please share another movie.');
+
+    // Clear all input fields
     movieNameInput.value ='';
     videoLinkInput.value ='';
     movieCommentInput.value ='';
 
     return;
+
   }
 
-  // Check if link is a valid youtube url
+  // Check if link is valid youtube url
   if (!isValidYouTubeURL(videoLinkValue)) {
-    // Pop-up alert if the videoLink is not a valid YouTube link
+    // Pop-up alert if videoLink is not valid YouTube link
     alert('Please enter a valid YouTube video link.');
     return;
   }
@@ -158,20 +198,16 @@ function handleSubmit(event) {
   event.target.reset();
 
   alert(`Very nice ${userNameLocalStorage}! Your movie recommendation has been shared!`);
+
 }
 
 
 // ***** EXECUTABLE CODE *****
 
-// Load existing user data and userArray
 loadUserData();
-console.log(userArray);
 
-// Render greeting to current user
 renderGreeting();
 
-// Add listener to limit user ID to four digits only and ensure numeric value only
 userIDInput.addEventListener('input', handleIDInput);
 
-// Add event listener to form 'userForm' where user enters info
 shareMovieForm.addEventListener('submit', handleSubmit);
