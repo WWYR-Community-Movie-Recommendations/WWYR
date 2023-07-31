@@ -20,8 +20,9 @@ function renderGreeting() {
 }
 
 
-// Function to check local storage and load user data and userArray
+// Check local storage and load user data and userArray
 function loadUserData() {
+
   // Retrieve existing user data from local storage (if any) and convert into usable JavaScript data, if no data establish empty array
   let existingUsers = JSON.parse(localStorage.getItem('users')) || [];
 
@@ -30,6 +31,7 @@ function loadUserData() {
 
   // Retrieve current user name from local storage
   userNameLocalStorage = localStorage.getItem('userName');
+
 }
 
 
@@ -38,14 +40,18 @@ function loadMovieArray() {
 
   // Iterate through each user in userArray
   for (let i = 0; i < userArray.length; i++) {
+
     let user = userArray[i];
 
     // Within each user, iterate through recommendedMovie array of each user and push to movieArray
     for (let j = 0; j < user.recommendedMovies.length; j++) {
+
       let movie = user.recommendedMovies[j];
       movieArray.push(movie);
+
     }
   }
+
 }
 
 // Render Movie List from computer (only from other users not self)
@@ -136,15 +142,18 @@ function renderMovies() {
       contributorName.textContent = movieContributor;
       contributorName.style.fontWeight = 'normal';
     }
+
   }
+
 }
 
-// Convert url into embeddable format
+
+// Convert url into embeddable format by extracting videoID from Youtube URL
 function convertToEmbedURL(youtubeURL) {
-  // Extract the video ID from the YouTube URL
 
   // Split URL by '?v=' to get the video ID and timestamp
   let videoIDWithTimeStamp = youtubeURL.split('v=')[1];
+
   // Split video ID and timestamp by '&t=' to get video ID only
   let videoID = videoIDWithTimeStamp.split('&t=')[0];
 
@@ -152,6 +161,7 @@ function convertToEmbedURL(youtubeURL) {
   let embedURL = `https://www.youtube.com/embed/${videoID}`;
 
   return embedURL;
+
 }
 
 
