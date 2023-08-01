@@ -33,24 +33,25 @@
 
         <h1>Random Movie Recommendations</h1>
         <h2 id="user-greeting"></h2>
-        <div class="video-container">
-          <iframe 
-            id="video-iframe" 
-            width="560" 
-            height="315" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-          </iframe>
+        <div id="movie-details-container">
+          <div class="video-container">
+            <iframe
+              id="video-iframe"
+              width="560"
+              height="315"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+          
+          <p id="title-of-film">Movie Title:  <span id="title-of-film-text"></span></p>
+          <p id="movie-content">Movie Comment:  <span id="movie-comment-text"></span></p>
+          <p id="contributor-name">Contributor:  <span id="contributor-text"></span></p>
+          <p id="button-text">Click Button Below for Another Movie Recommendation!</p>
+          <button type="submit" id="get-movie-button">Get Movie!</button>
         </div>
-
-        <p id="title-of-film">Movie Title:  <span id="title-of-film-text"></span></p>
-        <p id="movie-content">Movie Comment:  <span id="movie-comment-text"></span></p>
-        <p id="contributor-name">Contributor:  <span id="contributor-text"></span></p>
-
-        <p id="button-text">Click Button Below for Another Movie Recommendation!</p>
-        <button type="submit" id="get-movie-button">Get Movie!</button>
 
       </div>
 
