@@ -67,8 +67,7 @@ function renderMovies() {
     let movieTitle = movieArray[i].movieName;
     let movieComment = movieArray[i].userComment;
     let movieLink = movieArray[i].videoLink;
-    // Convert the YouTube URL to an embed URL
-    let embedURL = convertToEmbedURL(movieLink);
+    let movieGenre = movieArray[i].genre;
 
     if (movieContributor !== userNameLocalStorage) {
 
@@ -95,7 +94,7 @@ function renderMovies() {
       videoContainer.appendChild(videoiFrame);
 
       // Set the src attribute of the iframe to the embed URL
-      videoiFrame.src = embedURL;
+      videoiFrame.src = movieLink;
 
       // Create section element and append to div movieContainer (master parent)
       let filmDetails = document.createElement('section');
@@ -130,6 +129,20 @@ function renderMovies() {
       commentMovieText.textContent = `"${movieComment}"`;
       commentMovieText.style.fontWeight = 'normal';
       commentMovieText.style.fontStyle = 'italic';
+
+      // Create p element and append to sec filmDetails
+      let genreDetail = document.createElement('p');
+      genreDetail.setAttribute('id', 'genre-of-film');
+      genreDetail.setAttribute('class', 'movie-details');
+      genreDetail.textContent = 'Genre:  ';
+      filmDetails.appendChild(genreDetail);
+
+      // Create <span> element, append to <p> element, output name of movie comment
+      let genreText = document.createElement('span');
+      genreText.setAttribute('id', 'genre-text');
+      genreDetail.appendChild(genreText);
+      genreText.textContent = movieGenre;
+      genreText.style.fontWeight = 'normal';
 
       // Create p element and append to sec filmDetails
       let movieDetailContributor = document.createElement('p');
@@ -160,8 +173,7 @@ function renderMoviesOfSelf() {
     let movieTitle = movieArray[i].movieName;
     let movieComment = movieArray[i].userComment;
     let movieLink = movieArray[i].videoLink;
-    // Convert the YouTube URL to an embed URL
-    let embedURL = convertToEmbedURL(movieLink);
+    let movieGenre = movieArray[i].genre;
 
     if (movieContributor === userNameLocalStorage) {
 
@@ -188,7 +200,7 @@ function renderMoviesOfSelf() {
       videoContainer.appendChild(videoiFrame);
 
       // Set the src attribute of the iframe to the embed URL
-      videoiFrame.src = embedURL;
+      videoiFrame.src = movieLink;
 
       // Create section element and append to div movieContainer (master parent)
       let filmDetails = document.createElement('section');
@@ -225,6 +237,20 @@ function renderMoviesOfSelf() {
       commentMovieText.style.fontStyle = 'italic';
 
       // Create p element and append to sec filmDetails
+      let genreDetail = document.createElement('p');
+      genreDetail.setAttribute('id', 'genre-of-film');
+      genreDetail.setAttribute('class', 'movie-details');
+      genreDetail.textContent = 'Genre:  ';
+      filmDetails.appendChild(genreDetail);
+
+      // Create <span> element, append to <p> element, output name of movie comment
+      let genreText = document.createElement('span');
+      genreText.setAttribute('id', 'genre-text');
+      genreDetail.appendChild(genreText);
+      genreText.textContent = movieGenre;
+      genreText.style.fontWeight = 'normal';
+
+      // Create p element and append to sec filmDetails
       let movieDetailContributor = document.createElement('p');
       movieDetailContributor.setAttribute('id', 'title-of-film');
       movieDetailContributor.setAttribute('class', 'movie-details');
@@ -240,30 +266,6 @@ function renderMoviesOfSelf() {
     }
 
   }
-
-}
-
-
-// Convert url into embeddable format by extracting videoID from Youtube URL
-function convertToEmbedURL(youtubeURL) {
-
-  // search for characters after 'v=' and ignore once reaches '&'
-  let regex = /[?&]v=([^&]+)/;
-  let match = youtubeURL.match(regex);
-  let videoID = null;
-
-  if (match) {
-    videoID = match[1];
-  } else {
-    // Handle invalid or unsupported URLs
-    console.error('Invalid YouTube URL:', youtubeURL);
-    return null;
-  }
-
-  // Construct the embed URL with the video ID
-  let embedURL = `https://www.youtube.com/embed/${videoID}`;
-
-  return embedURL;
 
 }
 
@@ -286,8 +288,21 @@ function handleSortButton() {
     renderMovies();
 
   } else if (sortOption === 'self-submitted') {
-    movieArray.sort((a, b) => a.userName.localeCompare(b.userName));
-    renderMoviesOfSelf();
+    if ( movieArray.some(movie => movie.userName === userNameLocalStorage) ) {
+      movieArray.sort((a, b) => a.userName.localeCompare(b.userName));
+      renderMoviesOfSelf();
+    } else {
+      // Output a <p> element indicating user hasn't shared any movie recommendations yet
+      movieContainer.innerHTML = ''; // Clear any existing content
+      let noRecommendationsMessage = document.createElement('p');
+      noRecommendationsMessage.setAttribute('id', 'no-recommendation-message');
+      movieContainer.appendChild(noRecommendationsMessage);
+      noRecommendationsMessage.textContent = `${userNameLocalStorage}, unlock the movie-sharing experience by sharing your first recommendation! Click the 'Share a Movie' button to begin the journey!`;
+    }
+
+  } else if (sortOption === 'genre') {
+    movieArray.sort((a, b) => a.genre.localeCompare(b.genre));
+    renderMovies();
   }
 
 }
