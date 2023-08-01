@@ -90,6 +90,30 @@ h2 {
   font-weight: bold;
 }
 
+#share-movie-form {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+}
+
+#genre-dropdown {
+  font-size: 1.25vw;
+  font-family: 'Roboto', sans-serif;
+  width: 50%;
+  height: 5vh;
+  border-radius: 10px;
+  margin-bottom: 5%;
+  margin-left: 3%;
+  background-color: #E4E4E4A8;
+  color:  #757373;
+  border: none;
+  padding-left: 1%;
+}
+
 input {
   font-size: 1.25vw;
   font-family: 'Roboto', sans-serif;

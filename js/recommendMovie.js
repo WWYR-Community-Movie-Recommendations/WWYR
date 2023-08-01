@@ -13,15 +13,17 @@ let userIDInput = document.getElementById('user-ID');
 let videoLinkInput = document.getElementById('video-link');
 let movieNameInput = document.getElementById('movie-name');
 let movieCommentInput = document.getElementById('user-comment');
+let genreDropdown = document.getElementById('genre-dropdown');
 
 
 // ***** CONSTRUCTOR FUNCTION *****
 // Create movie objects
-function MovieData (movieName, userComment, videoLink, userName) {
+function MovieData (movieName, userComment, videoLink, userName, genre) {
   this.movieName = movieName;
   this.userComment = userComment;
   this.videoLink = videoLink;
   this.userName = userName;
+  this.genre = genre;
 }
 
 
@@ -134,6 +136,7 @@ function handleSubmit(event) {
   let userCommentValue = event.target.userComment.value;
   let videoLinkValue = event.target.videoLink.value;
   let userIDValue = event.target.userID.value;
+  let genreValue = genreDropdown.value;
 
   // Check if user ID & name matches object pair from userArray
   let userIndex = findUserIndex(userNameLocalStorage, userIDValue);
@@ -175,6 +178,7 @@ function handleSubmit(event) {
     movieNameInput.value ='';
     videoLinkInput.value ='';
     movieCommentInput.value ='';
+    genreDropdown.value = '';
 
     return;
 
@@ -188,7 +192,7 @@ function handleSubmit(event) {
   }
 
   // If everything valid/correct, push movie data object to userArray.recommended movies[]
-  let userMovieData = new MovieData(movieNameValue, userCommentValue,videoLinkValue,userNameLocalStorage);
+  let userMovieData = new MovieData(movieNameValue, userCommentValue,videoLinkValue,userNameLocalStorage, genreValue);
   userArray[userIndex].recommendedMovies.push(userMovieData);
 
   // Update local storage with the new movie data

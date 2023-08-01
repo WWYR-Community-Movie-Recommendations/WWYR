@@ -16,7 +16,6 @@
   <main>
 
     <div class="grid-container">
-
       <div class="nav-container">
         <nav>
           <ul>
@@ -30,16 +29,30 @@
       </div>
 
       <div class="recommend-movie-container">
-
         <h1>Share Your Movie Recommendation</h1>
 
         <h2 id="user-greeting"></h2>
 
         <form id="share-movie-form">
-
           <fieldset>
             <label for="movieName"></label>
             <input type="text" id="movie-name" name="movieName" placeholder="   Enter Name of Movie">
+
+            <select id="genre-dropdown">
+              <option value="" disabled selected hidden>Select Genre</option>
+              <option value="action">Action</option>
+              <option value="adventure">Adventure</option>
+              <option value="animation">Animation</option>
+              <option value="comedy">Comedy</option>
+              <option value="drama">Drama</option>
+              <option value="family">Family</option>
+              <option value="fantasy">Fantasy</option>
+              <option value="horror">Horror</option>
+              <option value="mystery">Mystery</option>
+              <option value="romance">Romance</option>
+              <option value="sci-fi">Sci-Fi</option>
+              <option value="thriller">Thriller</option>
+            </select>
 
             <label for="userComment"></label>
             <input type="text" id="user-comment" name="userComment" placeholder="   Enter Movie Comment">
@@ -47,16 +60,15 @@
             <label for="videoLink"></label>
             <input type="text" id="video-link" name="videoLink" placeholder="   Enter movie trailer url">
 
+            
+
             <label for="userID"></label>
             <input type="text" id="user-ID" maxlength="4" name="userID" placeholder="   Enter user ID#">
           </fieldset>
 
           <button type="submit">Share Recommendation</button>
-
         </form>
-
       </div>
-
     </div>
 
   </main>
