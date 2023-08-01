@@ -9,6 +9,7 @@ let prevRandomNumber = null;
 
 
 // ***** DOM WINDOWS *****
+let movieDetailsContainer = document.getElementById('movie-details-container');
 let userGreeting = document.getElementById('user-greeting');
 let getMovieButton = document.getElementById('get-movie-button');
 let videoTrailer = document.getElementById('video-iframe');
@@ -27,7 +28,15 @@ function randomIndexGenerator() {
 
 // Update the content of the h2 element with the greeting message
 function renderGreeting() {
-  userGreeting.textContent = `Welcome ${userNameLocalStorage}! Here is your recommended movie!`;
+  if (
+    movieArray.length === 0 ||
+    movieArray.some(movie => movie.userName === userNameLocalStorage) ) {
+
+    userGreeting.textContent = `Welcome ${userNameLocalStorage}! Your community hasn't shared any movies yet! Be the first to contribute by sharing a movie. Click on the 'Share a Movie' button to get started!`;
+
+  } else {
+    userGreeting.textContent = `Welcome ${userNameLocalStorage}! Here is your recommended movie!`;
+  }
 }
 
 
@@ -60,64 +69,53 @@ function loadMovieArray() {
 }
 
 
-// Convert url into embeddable format
-function convertToEmbedURL(youtubeURL) {
-  // Extract the video ID from the YouTube URL
-
-  // Split URL by '?v=' to get the video ID and timestamp
-  let videoIDWithTimeStamp = youtubeURL.split('v=')[1];
-  // Split video ID and timestamp by '&t=' to get video ID only
-  let videoID = videoIDWithTimeStamp.split('&t=')[0];
-
-
-  // Construct the embed URL with the video ID
-  let embedURL = `https://www.youtube.com/embed/${videoID}`;
-
-  return embedURL;
-}
-
-
 // Ouput random movie from other users only, not self
 function renderRandomMovie() {
-
   let randomNumber;
   let randomMovieContributor;
 
-  // Ensure movies presented are only from other users, not self. Also prevents repeat movie recommendation twice in a row.
-  do {
-    randomNumber = randomIndexGenerator();
-    randomMovieContributor = movieArray[randomNumber].userName;
-  } while (
-    randomMovieContributor === userNameLocalStorage ||
-    randomNumber === prevRandomNumber
-  );
+  if (
+    movieArray.length === 0 ||
+    movieArray.some(movie => movie.userName === userNameLocalStorage) ) {
 
-  prevRandomNumber = randomNumber; // Update the previous random index
+    movieDetailsContainer.innerHTML = ''; // Clear any existing content
 
-  let randomMovieTitle = movieArray[randomNumber].movieName;
-  let randomMovieComment = movieArray[randomNumber].userComment;
-  let randomMovieLink = movieArray[randomNumber].videoLink;
+  } else {
 
-  // Convert the YouTube URL to an embed URL
-  let embedURL = convertToEmbedURL(randomMovieLink);
+    // Ensure movies presented are only from other users, not self. Also prevents repeat movie recommendation twice in a row.
+    do {
+      randomNumber = randomIndexGenerator();
+      randomMovieContributor = movieArray[randomNumber].userName;
+    } while (
+      randomMovieContributor === userNameLocalStorage ||
+      randomNumber === prevRandomNumber
+    );
 
-  // Set the src attribute of the iframe to the embed URL
-  videoTrailer.src = embedURL;
+    prevRandomNumber = randomNumber; // Update the previous random index
 
-  // Output h2 element with name of movie title
-  titleOfFilmText.textContent = randomMovieTitle;
-  titleOfFilmText.style.fontWeight = 'normal';
+    let randomMovieTitle = movieArray[randomNumber].movieName;
+    let randomMovieComment = movieArray[randomNumber].userComment;
+    let randomMovieLink = movieArray[randomNumber].videoLink;
 
-  // Ouput p element with movie comment
-  movieCommentText.textContent = `"${randomMovieComment}"`;
-  movieCommentText.style.fontWeight = 'normal';
-  movieCommentText.style.fontStyle = 'italic';
+    // Set the src attribute of the iframe to the embed URL
+    videoTrailer.src = randomMovieLink;
 
-  // Output p element with contributor name
-  contributorText.textContent = randomMovieContributor;
-  contributorText.style.fontWeight = 'normal';
+    // Output h2 element with name of movie title
+    titleOfFilmText.textContent = randomMovieTitle;
+    titleOfFilmText.style.fontWeight = 'normal';
 
+    // Ouput p element with movie comment
+    movieCommentText.textContent = `"${randomMovieComment}"`;
+    movieCommentText.style.fontWeight = 'normal';
+    movieCommentText.style.fontStyle = 'italic';
+
+    // Output p element with contributor name
+    contributorText.textContent = randomMovieContributor;
+    contributorText.style.fontWeight = 'normal';
+
+  }
 }
+
 
 
 // ***** EVENT HANDLERS *****
@@ -138,4 +136,3 @@ renderRandomMovie();
 
 // Add event listener to button 'get-movie'
 getMovieButton.addEventListener('click', handleGetMovie);
-
