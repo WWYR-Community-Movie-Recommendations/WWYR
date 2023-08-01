@@ -26,13 +26,14 @@ function randomIndexGenerator() {
 }
 
 
-// Update the content of the h2 element with the greeting message
+// Update content of h2 element with greeting message if no movies shared yet message, or a recommended movie
 function renderGreeting() {
   if (
     movieArray.length === 0 ||
     movieArray.some(movie => movie.userName === userNameLocalStorage) ) {
 
     userGreeting.textContent = `Welcome ${userNameLocalStorage}! Your community hasn't shared any movies yet! Be the first to contribute by sharing a movie. Click on the 'Share a Movie' button to get started!`;
+    userGreeting.style.fontWeight = 'normal';
 
   } else {
     userGreeting.textContent = `Welcome ${userNameLocalStorage}! Here is your recommended movie!`;
@@ -74,11 +75,13 @@ function renderRandomMovie() {
   let randomNumber;
   let randomMovieContributor;
 
+  // If no movies present in movieArray clear html content
   if (
     movieArray.length === 0 ||
     movieArray.some(movie => movie.userName === userNameLocalStorage) ) {
 
     movieDetailsContainer.innerHTML = ''; // Clear any existing content
+    return;
 
   } else {
 
