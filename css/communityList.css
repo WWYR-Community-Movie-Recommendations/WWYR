@@ -132,6 +132,14 @@ select option:checked:hover {
   transition: 350ms;
 }
 
+#no-recommendation-message {
+  margin-top: 5%;
+  font-size: 1.25vw;
+  color: #030303;
+  font-family: 'Roboto', sans-serif;
+  
+}
+
 .video-container {
   display: flex;
   flex-direction: column; 
