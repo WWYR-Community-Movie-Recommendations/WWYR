@@ -83,9 +83,10 @@ function renderRandomMovie() {
 
     movieDetailsContainer.innerHTML = ''; // Clear any existing content
     return;
+  }
 
-  // Fix bug to prevent do while loop from running when only one movie present in movieArray from other user
-  } else if (
+  // Fix bug to prevent do while loop from running when only 1 movie present in movieArray from other user
+  if (
     movieArray.length === 1 &&
     movieArray[0].userName !== userNameLocalStorage
   ) {
@@ -111,7 +112,33 @@ function renderRandomMovie() {
     contributorText.textContent = onlyMovieContributor;
     contributorText.style.fontWeight = 'normal';
     return;
+  }
 
+  // Fix bug prevent do while loop from running when only one movie present in movieArray from other user when array length greater than 1
+  // Create new array to contain only the movies from other users, excluding current user
+  let otherUserMovies = movieArray.filter(
+    (movie) => movie.userName !== userNameLocalStorage
+  );
+
+  if (movieArray.length > 1 && otherUserMovies.length === 1) {
+    let movie = otherUserMovies[0];
+    // Set the src attribute of the iframe to the embed URL
+    videoTrailer.src = movie.videoLink;
+
+    // Output h2 element with name of movie title
+    titleOfFilmText.textContent = `Movie Title: ${movie.movieName}`;
+    titleOfFilmText.style.fontWeight = 'normal';
+
+    // Output p element with movie comment
+    movieCommentText.textContent = `Movie Comment: "${movie.userComment}"`;
+    movieCommentText.style.fontWeight = 'normal';
+    movieCommentText.style.fontStyle = 'italic';
+
+    // Output p element with contributor name
+    contributorText.textContent = `Contributor: ${movie.userName}`;
+    contributorText.style.fontWeight = 'normal';
+
+    return;
   }
 
   // Ensure movies presented are only from other users, not self. Also prevents repeat movie recommendation twice in a row.
