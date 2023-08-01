@@ -16,7 +16,7 @@ Provide users with movie recommendations (complete with YouTube trailer, contrib
 
 ### Domain Model (image)
 
-[Domain Model](img/DomainModel.jpeg)
+[Domain Model](img/DomainModel_2.png)
 
 ### WireFrames (images)
 
