@@ -30,7 +30,7 @@ function randomIndexGenerator() {
 function renderGreeting() {
   if (
     movieArray.length === 0 ||
-    movieArray.some(movie => movie.userName === userNameLocalStorage) ) {
+    movieArray.every(movie => movie.userName === userNameLocalStorage) ) {
 
     userGreeting.textContent = `Welcome ${userNameLocalStorage}! Your community hasn't shared any movies yet! Be the first to contribute by sharing a movie. Click on the 'Share a Movie' button to get started!`;
     userGreeting.style.fontWeight = 'normal';
@@ -78,48 +78,74 @@ function renderRandomMovie() {
   // If no movies present in movieArray clear html content
   if (
     movieArray.length === 0 ||
-    movieArray.some(movie => movie.userName === userNameLocalStorage) ) {
+    movieArray.every(movie => movie.userName === userNameLocalStorage)
+  ) {
 
     movieDetailsContainer.innerHTML = ''; // Clear any existing content
     return;
 
-  } else {
+  // Fix bug to prevent do while loop from running when only one movie present in movieArray from other user
+  } else if (
+    movieArray.length === 1 &&
+    movieArray[0].userName !== userNameLocalStorage
+  ) {
 
-    // Ensure movies presented are only from other users, not self. Also prevents repeat movie recommendation twice in a row.
-    do {
-      randomNumber = randomIndexGenerator();
-      randomMovieContributor = movieArray[randomNumber].userName;
-    } while (
-      randomMovieContributor === userNameLocalStorage ||
-      randomNumber === prevRandomNumber
-    );
-
-    prevRandomNumber = randomNumber; // Update the previous random index
-
-    let randomMovieTitle = movieArray[randomNumber].movieName;
-    let randomMovieComment = movieArray[randomNumber].userComment;
-    let randomMovieLink = movieArray[randomNumber].videoLink;
+    let onlyMovieTitle = movieArray[0].movieName;
+    let onlyMovieComment = movieArray[0].userComment;
+    let onlyMovieLink = movieArray[0].videoLink;
+    let onlyMovieContributor = movieArray[0].userName;
 
     // Set the src attribute of the iframe to the embed URL
-    videoTrailer.src = randomMovieLink;
+    videoTrailer.src = onlyMovieLink;
 
     // Output h2 element with name of movie title
-    titleOfFilmText.textContent = randomMovieTitle;
+    titleOfFilmText.textContent = onlyMovieTitle;
     titleOfFilmText.style.fontWeight = 'normal';
 
     // Ouput p element with movie comment
-    movieCommentText.textContent = `"${randomMovieComment}"`;
+    movieCommentText.textContent = `"${onlyMovieComment}"`;
     movieCommentText.style.fontWeight = 'normal';
     movieCommentText.style.fontStyle = 'italic';
 
     // Output p element with contributor name
-    contributorText.textContent = randomMovieContributor;
+    contributorText.textContent = onlyMovieContributor;
     contributorText.style.fontWeight = 'normal';
+    return;
 
   }
+
+  // Ensure movies presented are only from other users, not self. Also prevents repeat movie recommendation twice in a row.
+  do {
+    randomNumber = randomIndexGenerator();
+    randomMovieContributor = movieArray[randomNumber].userName;
+  } while (
+    randomMovieContributor === userNameLocalStorage ||
+    randomNumber === prevRandomNumber
+  );
+
+  prevRandomNumber = randomNumber; // Update the previous random index
+
+  let randomMovieTitle = movieArray[randomNumber].movieName;
+  let randomMovieComment = movieArray[randomNumber].userComment;
+  let randomMovieLink = movieArray[randomNumber].videoLink;
+
+  // Set the src attribute of the iframe to the embed URL
+  videoTrailer.src = randomMovieLink;
+
+  // Output h2 element with name of movie title
+  titleOfFilmText.textContent = randomMovieTitle;
+  titleOfFilmText.style.fontWeight = 'normal';
+
+  // Ouput p element with movie comment
+  movieCommentText.textContent = `"${randomMovieComment}"`;
+  movieCommentText.style.fontWeight = 'normal';
+  movieCommentText.style.fontStyle = 'italic';
+
+  // Output p element with contributor name
+  contributorText.textContent = randomMovieContributor;
+  contributorText.style.fontWeight = 'normal';
+
 }
-
-
 
 // ***** EVENT HANDLERS *****
 function handleGetMovie() {
