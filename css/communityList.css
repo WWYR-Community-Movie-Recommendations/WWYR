@@ -85,7 +85,7 @@ h2 {
   font-weight: bold;
 }
 
-.filter-container{
+.sort-container{
   display: flex;
   align-items: center;
   
@@ -95,7 +95,7 @@ h2 {
   
 }
 
-#filter-dropdown {
+#sort-dropdown {
   border: none;
   background-color: #e4e4e4a8;
   font-size: 1vw;
@@ -112,7 +112,7 @@ select option:checked:hover {
   background-color: #ec242a; /* Change the background color to blue when hovering over the selected option */
 }
 
-#filter-button:hover {
+#sort-button:hover {
   background-color: #ec242a;
   font-weight: bold;
   font-size: 1.1vw;
@@ -120,7 +120,7 @@ select option:checked:hover {
   cursor: pointer;
 }
 
-#filter-button {
+#sort-button {
   font-size: 1vw;
   font-family: 'Roboto', sans-serif;
   border-radius: 10px;

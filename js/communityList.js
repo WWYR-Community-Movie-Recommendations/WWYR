@@ -10,6 +10,9 @@ let movieArray = [];
 let userGreeting = document.getElementById('user-greeting');
 // Get parent container to append the movies
 let movieContainer = document.getElementById('movie-container');
+let sortButton = document.getElementById('sort-button');
+// Get the value of the selected option from the dropdown
+let sortDropdown = document.getElementById('sort-dropdown');
 
 
 // ***** HELPER FUNCTIONS / UTILITIES *****
@@ -165,6 +168,26 @@ function convertToEmbedURL(youtubeURL) {
 }
 
 
+// ***** EVENT HANDLER(S) *****
+
+function handleSortButton() {
+  let sortOption = sortDropdown.value;
+
+  // Sort the movieArray based on the selected option
+  if (sortOption === 'username') {
+
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
+    //localeCompare ensures sorting is done correctly for strings in different languages or locales. Instead of just using movieArray.sort()
+    movieArray.sort((a, b) => a.userName.localeCompare(b.userName));
+  } else if (sortOption === 'movietitle') {
+    movieArray.sort((a, b) => a.movieName.localeCompare(b.movieName));
+
+  }
+
+  // Render sorted movie list
+  renderMovies();
+}
+
 // ***** EXECUTABLE CODE *****
 
 loadUserData();
@@ -174,3 +197,5 @@ loadMovieArray();
 renderGreeting();
 
 renderMovies();
+
+sortButton.addEventListener('click', handleSortButton);
