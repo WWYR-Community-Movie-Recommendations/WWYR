@@ -90,7 +90,21 @@ p {
   color: #030303;
   font-size: 1vw;
   font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  margin-top: 1%; 
+  margin-bottom: 1.5%;
   width: 50%;
+  font-style: italic;
+  line-height: 1.75vw;
+}
+
+#name, 
+#background-info,
+#goals,
+#reason {
+  font-size: 1.5vw;
+  margin-bottom: .5%;
+  font-weight: bold;
+}
+
+#name {
+  margin-bottom: 1.5%;
 }
