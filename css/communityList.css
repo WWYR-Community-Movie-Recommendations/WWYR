@@ -1,0 +1,134 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+main {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.grid-container {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 25vw 1fr;
+  grid-auto-columns: minmax(minimum, maximum);
+}
+
+.nav-container {
+  height: auto;
+  text-align: center;
+  background-color: #ec242a;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  width: 80%;
+  margin-top: 24%;
+}
+
+li {
+  background-color: white;
+  margin-bottom: 15%;
+  width: 100%;
+  height: 10vh;
+  border-radius: 10px;
+}
+
+a:hover {
+  font-size: 1.6vw;
+  font-weight: bold;
+  color: #ec242a;
+}
+
+a {
+  font-size: 1.5vw;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  color: #171a1d;
+  text-decoration: none;
+  border: none;
+  padding: 2%;
+  line-height: 10vh;
+  transition: 350ms;
+}
+
+h1 {
+  color: #171a1d;
+  font-size: 3vw;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  padding: 2% 0% 2% 3%;
+  margin-bottom: 2%;
+  background-color: #E4E4E4A8;
+}
+
+h2 {
+  margin-bottom: 2%;
+  font-size: 1.5vw;
+  margin-left: 3%;
+  color: #030303;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+#movie-trailer-detail-container {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  border: 3px solid #E4E4E4A8;
+  margin-top: 3%;
+  width: 100%;
+  padding: 1%;
+}
+
+.video-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start;
+  margin-left: 3%;
+  margin-bottom: 2%;
+  height: max-content;
+  width: 70vw;
+}
+
+.youtube-videos {
+  top: 0;
+  left: 0;
+  width: max-content;
+  height: 100%;
+}
+
+#film-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  margin-left: 1%;
+}
+
+.movie-details {
+  margin-left: 3%; 
+  margin-top: 2.5%;
+  color: #171a1d;
+  font-size: 1.25vw;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  width: max-content;
+}
+
+

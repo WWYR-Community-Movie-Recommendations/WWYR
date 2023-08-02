@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>WWYR-What Would You Recommend</title>
+</head>
+
+<body>
+
+  <main>
+
+    <div class="grid-container">
+      <div class="logo-container">
+
+        <h1>WWYR</h1>
+        <img src="img/samuel-regan-asante-wMkaMXTJjlQ-unsplash.jpg" alt="picture of a variety of movies">
+        <p id="hero-text">Discover Trusted Movie Recommendations</p>
+
+      </div>
+
+      <div class="existing-user-container">
+
+        <p id="existing-user-text">Welcome Back!</p>
+
+        <form id="existingUserForm">
+          <fieldset>
+            <label for="username"></label>
+            <input type="text" id="username" name="userName" placeholder="   Enter User Name">
+
+            <label for="userID"></label>
+            <input type="text" id="userID" maxlength="4" name="userID" placeholder="   Enter four-digit user ID#">
+          </fieldset>
+
+          <button type="submit" id="submit-button">Submit</button>
+        </form>
+
+        <a href="newUser.html">New User? Click Here</a>
+
+      </div>
+    </div>
+
+  </main>
+  <script src="js/index.js"></script>
+</body>
+
+</html>
