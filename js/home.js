@@ -130,12 +130,12 @@ function renderRandomMovie() {
     titleOfFilmText.style.fontWeight = 'normal';
 
     // Output p element with movie comment
-    movieCommentText.textContent = `Movie Comment: "${movie.userComment}"`;
+    movieCommentText.textContent = movie.userComment;
     movieCommentText.style.fontWeight = 'normal';
     movieCommentText.style.fontStyle = 'italic';
 
     // Output p element with contributor name
-    contributorText.textContent = `Contributor: ${movie.userName}`;
+    contributorText.textContent = movie.userName;
     contributorText.style.fontWeight = 'normal';
 
     return;
