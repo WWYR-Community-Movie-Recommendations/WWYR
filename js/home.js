@@ -9,6 +9,7 @@ let prevRandomNumber = null;
 
 
 // ***** DOM WINDOWS *****
+let movieDetailsContainer = document.getElementById('movie-details-container');
 let userGreeting = document.getElementById('user-greeting');
 let getMovieButton = document.getElementById('get-movie-button');
 let videoTrailer = document.getElementById('video-iframe');
@@ -25,9 +26,18 @@ function randomIndexGenerator() {
 }
 
 
-// Update the content of the h2 element with the greeting message
+// Update content of h2 element with greeting message if no movies shared yet message, or a recommended movie
 function renderGreeting() {
-  userGreeting.textContent = `Welcome ${userNameLocalStorage}! Here is your recommended movie!`;
+  if (
+    movieArray.length === 0 ||
+    movieArray.every(movie => movie.userName === userNameLocalStorage) ) {
+
+    userGreeting.textContent = `Welcome ${userNameLocalStorage}! Your community hasn't shared any movies yet! Be the first to contribute by sharing a movie. Click on the 'Share a Movie' button to get started!`;
+    userGreeting.style.fontWeight = 'normal';
+
+  } else {
+    userGreeting.textContent = `Welcome ${userNameLocalStorage}! Here is your recommended movie!`;
+  }
 }
 
 
@@ -60,28 +70,76 @@ function loadMovieArray() {
 }
 
 
-// Convert url into embeddable format
-function convertToEmbedURL(youtubeURL) {
-  // Extract the video ID from the YouTube URL
-
-  // Split URL by '?v=' to get the video ID and timestamp
-  let videoIDWithTimeStamp = youtubeURL.split('v=')[1];
-  // Split video ID and timestamp by '&t=' to get video ID only
-  let videoID = videoIDWithTimeStamp.split('&t=')[0];
-
-
-  // Construct the embed URL with the video ID
-  let embedURL = `https://www.youtube.com/embed/${videoID}`;
-
-  return embedURL;
-}
-
-
 // Ouput random movie from other users only, not self
 function renderRandomMovie() {
-
   let randomNumber;
   let randomMovieContributor;
+
+  // If no movies present in movieArray clear html content
+  if (
+    movieArray.length === 0 ||
+    movieArray.every(movie => movie.userName === userNameLocalStorage)
+  ) {
+
+    movieDetailsContainer.innerHTML = ''; // Clear any existing content
+    return;
+  }
+
+  // Fix bug to prevent do while loop from running when only 1 movie present in movieArray from other user
+  if (
+    movieArray.length === 1 &&
+    movieArray[0].userName !== userNameLocalStorage
+  ) {
+
+    let onlyMovieTitle = movieArray[0].movieName;
+    let onlyMovieComment = movieArray[0].userComment;
+    let onlyMovieLink = movieArray[0].videoLink;
+    let onlyMovieContributor = movieArray[0].userName;
+
+    // Set the src attribute of the iframe to the embed URL
+    videoTrailer.src = onlyMovieLink;
+
+    // Output h2 element with name of movie title
+    titleOfFilmText.textContent = onlyMovieTitle;
+    titleOfFilmText.style.fontWeight = 'normal';
+
+    // Ouput p element with movie comment
+    movieCommentText.textContent = `"${onlyMovieComment}"`;
+    movieCommentText.style.fontWeight = 'normal';
+    movieCommentText.style.fontStyle = 'italic';
+
+    // Output p element with contributor name
+    contributorText.textContent = onlyMovieContributor;
+    contributorText.style.fontWeight = 'normal';
+    return;
+  }
+
+  // Fix bug prevent do while loop from running when only one movie present in movieArray from other user when array length greater than 1
+  // Create new array to contain only the movies from other users, excluding current user
+  let otherUserMovies = movieArray.filter(
+    (movie) => movie.userName !== userNameLocalStorage
+  );
+
+  if (movieArray.length > 1 && otherUserMovies.length === 1) {
+    let movie = otherUserMovies[0];
+    // Set the src attribute of the iframe to the embed URL
+    videoTrailer.src = movie.videoLink;
+
+    // Output h2 element with name of movie title
+    titleOfFilmText.textContent = `Movie Title: ${movie.movieName}`;
+    titleOfFilmText.style.fontWeight = 'normal';
+
+    // Output p element with movie comment
+    movieCommentText.textContent = `Movie Comment: "${movie.userComment}"`;
+    movieCommentText.style.fontWeight = 'normal';
+    movieCommentText.style.fontStyle = 'italic';
+
+    // Output p element with contributor name
+    contributorText.textContent = `Contributor: ${movie.userName}`;
+    contributorText.style.fontWeight = 'normal';
+
+    return;
+  }
 
   // Ensure movies presented are only from other users, not self. Also prevents repeat movie recommendation twice in a row.
   do {
@@ -98,11 +156,8 @@ function renderRandomMovie() {
   let randomMovieComment = movieArray[randomNumber].userComment;
   let randomMovieLink = movieArray[randomNumber].videoLink;
 
-  // Convert the YouTube URL to an embed URL
-  let embedURL = convertToEmbedURL(randomMovieLink);
-
   // Set the src attribute of the iframe to the embed URL
-  videoTrailer.src = embedURL;
+  videoTrailer.src = randomMovieLink;
 
   // Output h2 element with name of movie title
   titleOfFilmText.textContent = randomMovieTitle;
@@ -118,7 +173,6 @@ function renderRandomMovie() {
   contributorText.style.fontWeight = 'normal';
 
 }
-
 
 // ***** EVENT HANDLERS *****
 function handleGetMovie() {
@@ -138,4 +192,3 @@ renderRandomMovie();
 
 // Add event listener to button 'get-movie'
 getMovieButton.addEventListener('click', handleGetMovie);
-

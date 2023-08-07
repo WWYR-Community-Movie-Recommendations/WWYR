@@ -30,7 +30,20 @@
 
       <div class="recommendation-list-container">
         <h1>Community List</h1>
-        <h2 id="user-greeting">Community Movie Recommendations: Explore the Full List!</h2>
+
+        <h2 id="user-greeting"></h2>
+
+        <div class="sort-container">
+          <label for="sort-dropdown">Sort By:</label>
+          <select id="sort-dropdown">
+            <option value="username">Username</option>
+            <option value="movietitle">Movie Title</option>
+            <option value="genre">Genre</option>
+            <option value="self-submitted">Shared By Me</option>
+          </select>
+          <button id="sort-button">Sort</button>
+        </div>
+
         <div class="video-container" id="movie-container"></div>
       </div>
 

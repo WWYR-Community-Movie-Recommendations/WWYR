@@ -13,15 +13,17 @@ let userIDInput = document.getElementById('user-ID');
 let videoLinkInput = document.getElementById('video-link');
 let movieNameInput = document.getElementById('movie-name');
 let movieCommentInput = document.getElementById('user-comment');
+let genreDropdown = document.getElementById('genre-dropdown');
 
 
 // ***** CONSTRUCTOR FUNCTION *****
 // Create movie objects
-function MovieData (movieName, userComment, videoLink, userName) {
+function MovieData (movieName, userComment, videoLink, userName, genre) {
   this.movieName = movieName;
   this.userComment = userComment;
   this.videoLink = videoLink;
   this.userName = userName;
+  this.genre = genre;
 }
 
 
@@ -107,6 +109,30 @@ function isValidYouTubeURL(url) {
 }
 
 
+// Convert url into embeddable format by extracting videoID from Youtube URL
+function convertToEmbedURL(youtubeURL) {
+
+  // search for characters after 'v=' and ignore once reaches '&'
+  let regex = /[?&]v=([^&]+)/;
+  let match = youtubeURL.match(regex);
+  let videoID = null;
+
+  if (match) {
+    videoID = match[1];
+  } else {
+    // Handle invalid or unsupported URLs
+    console.error('Invalid YouTube URL:', youtubeURL);
+    return null;
+  }
+
+  // Construct the embed URL with the video ID
+  let embedURL = `https://www.youtube.com/embed/${videoID}`;
+
+  return embedURL;
+
+}
+
+
 // ***** EVENT HANDLERS *****
 
 // Limit user ID to four digits only and ensure numeric value only
@@ -134,12 +160,23 @@ function handleSubmit(event) {
   let userCommentValue = event.target.userComment.value;
   let videoLinkValue = event.target.videoLink.value;
   let userIDValue = event.target.userID.value;
+  let genreValue = genreDropdown.value;
+  let embedURL = '';
+
+  // Check if link is valid youtube url, if valid convert url to embedabble format
+  if (!isValidYouTubeURL(videoLinkValue)) {
+    // Pop-up alert if videoLink is not valid YouTube link
+    alert('Please enter a valid YouTube video link.');
+    return;
+  } else {
+    embedURL = convertToEmbedURL(videoLinkValue);
+  }
 
   // Check if user ID & name matches object pair from userArray
   let userIndex = findUserIndex(userNameLocalStorage, userIDValue);
 
   // Check if youtube url is a repeat already submitted by another user
-  let findMovieLink = findMovieURL(videoLinkValue);
+  let findMovieLink = findMovieURL(embedURL);
 
   // Check if name of movie has been used before
   let findMovieName = findMovieTitle(movieNameValue);
@@ -155,6 +192,21 @@ function handleSubmit(event) {
     return;
   }
 
+  // Check if movie name or movie link have been sumbitted previously by another user
+  if (findMovieName !== undefined || findMovieLink !== undefined) {
+
+    alert('Movie name has already been shared by someone in your community! Please share another movie.');
+
+    // Clear all input fields
+    movieNameInput.value ='';
+    videoLinkInput.value ='';
+    movieCommentInput.value ='';
+    genreDropdown.value = '';
+
+    return;
+
+  }
+
   // If userIndex equals -1, no matching userName and userID were found in local storage
   if (userIndex === -1) {
 
@@ -166,29 +218,8 @@ function handleSubmit(event) {
     return;
   }
 
-  // Check if movie name or movie link have been sumbitted previously by another user
-  if (findMovieName !== undefined || findMovieLink !== undefined) {
-
-    alert('Movie name has already been shared by someone in your community! Please share another movie.');
-
-    // Clear all input fields
-    movieNameInput.value ='';
-    videoLinkInput.value ='';
-    movieCommentInput.value ='';
-
-    return;
-
-  }
-
-  // Check if link is valid youtube url
-  if (!isValidYouTubeURL(videoLinkValue)) {
-    // Pop-up alert if videoLink is not valid YouTube link
-    alert('Please enter a valid YouTube video link.');
-    return;
-  }
-
   // If everything valid/correct, push movie data object to userArray.recommended movies[]
-  let userMovieData = new MovieData(movieNameValue, userCommentValue,videoLinkValue,userNameLocalStorage);
+  let userMovieData = new MovieData(movieNameValue, userCommentValue, embedURL, userNameLocalStorage, genreValue);
   userArray[userIndex].recommendedMovies.push(userMovieData);
 
   // Update local storage with the new movie data

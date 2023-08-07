@@ -85,14 +85,59 @@ h2 {
   font-weight: bold;
 }
 
-#movie-trailer-detail-container {
-  display:flex;
-  flex-direction: row;
+.sort-container{
+  display: flex;
   align-items: center;
-  border: 3px solid #E4E4E4A8;
-  margin-top: 3%;
-  width: 100%;
-  padding: 1%;
+  
+  font-size: 1.3vw;
+  font-family: 'Roboto', sans-serif;
+  padding-left: 3%;
+  
+}
+
+#sort-dropdown {
+  border: none;
+  background-color: #e4e4e4a8;
+  font-size: 1vw;
+  margin-left: 1%;
+  margin-right: 2%;
+  border-radius: 10px;
+  padding-right: .5%;
+  padding-left: .5%;
+  padding-top: .5%;
+  padding-bottom: .5%;
+}
+
+select option:checked:hover {
+  background-color: #ec242a; /* Change the background color to blue when hovering over the selected option */
+}
+
+#sort-button:hover {
+  background-color: #ec242a;
+  font-weight: bold;
+  font-size: 1.1vw;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+#sort-button {
+  font-size: 1vw;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 10px;
+  color: #171a1d;
+  background-color: #e4e4e4a8;
+  padding: .5% 0%;
+  width: 10%;
+  border: none;
+  transition: 350ms;
+}
+
+#no-recommendation-message {
+  margin-top: 5%;
+  font-size: 1.25vw;
+  color: #030303;
+  font-family: 'Roboto', sans-serif;
+  
 }
 
 .video-container {
@@ -103,6 +148,16 @@ h2 {
   margin-bottom: 2%;
   height: max-content;
   width: 70vw;
+}
+
+#movie-trailer-detail-container {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  border: 3px solid #E4E4E4A8;
+  margin-top: 3%;
+  width: 97%;
+  padding: 1%;
 }
 
 .youtube-videos {
