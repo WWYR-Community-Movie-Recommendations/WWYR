@@ -4,6 +4,7 @@
 let userNameLocalStorage ='';
 let userArray = [];
 let movieArray = [];
+let watchedMovieArray = [];
 
 
 // ***** DOM WINDOWS *****
@@ -14,6 +15,13 @@ let sortButton = document.getElementById('sort-button');
 // Get the value of the selected option from the dropdown
 let sortDropdown = document.getElementById('sort-dropdown');
 
+
+// ***** CONSTRUCTOR FUNCTION *****
+// Create watched movie objects to be re-used to add the watchedMoviesArray
+function WatchedMovieData (movieId, watched) {
+  this.movieId = movieId;
+  this.watched = watched;
+}
 
 // ***** HELPER FUNCTIONS / UTILITIES *****
 
@@ -162,6 +170,27 @@ function renderMovies() {
         movieDetailContributor.appendChild(contributorName);
         contributorName.textContent = movieContributor;
         contributorName.style.fontWeight = 'normal';
+
+        // Create <div> for check box input
+        let checkBoxContainer = document.createElement('div');
+        checkBoxContainer.setAttribute('id', 'checkbox-container');
+        filmDetails.appendChild(checkBoxContainer);
+
+        let checkboxLabel = document.createElement('label');
+        // checkboxLabel.htmlFor = `watched-label-${i}`; // Assign unique ID to each label
+        checkboxLabel.classList.add('watched-label'); // Add class for styling purpose
+        checkboxLabel.textContent = 'Marked as watched ';
+        checkboxLabel.style.fontWeight = 'normal';
+
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `watched-checkbox-${i}`; // Assign unique ID to each checkox
+        checkbox.classList.add('watched-checkbox'); // Add class for styling purpose
+
+        checkbox.addEventListener('change', handleWatchedCheckboxChange); // Add event listener
+
+        checkBoxContainer.appendChild(checkboxLabel);
+        checkBoxContainer.appendChild(checkbox);
       }
 
     }
@@ -269,11 +298,11 @@ function renderMoviesOfSelf() {
       contributorName.textContent = movieContributor;
       contributorName.style.fontWeight = 'normal';
     }
-
   }
-
 }
 
+
+// Displays message to user when no movies present.
 function displayNoRecommendationsMessage(message) {
   movieContainer.innerHTML = ''; // Clear any existing content
   let noRecommendationsMessage = document.createElement('p');
@@ -324,14 +353,42 @@ function handleSortButton() {
     }
 
   } else if (sortOption === 'genre') {
-
-    // If movie array empty or every movie in array matches existing user name output message, community hasn't shared any movies.
     if ( movieArray.length === 0 || movieArray.every(movie => movie.userName === userNameLocalStorage) ) {
       let message = `${userNameLocalStorage}, no movies have been shared by the community yet!`;
       displayNoRecommendationsMessage(message);
     } else {
       movieArray.sort((a, b) => a.genre.localeCompare(b.genre));
       renderMovies();
+    }
+  }
+
+}
+
+function handleWatchedCheckboxChange(event) {
+  let checkboxId = event.target.id; // Retrieve ID data from checkbox
+
+  // Obtain unique ID from checkboxId
+  // Split checkbox ID 'watched-checkbox-${i}' into array of substrings separated by '-' and obtain third string array which contains unique ID.
+  // Once unique ID obtained, convert ID from string to integer with parseInt().
+  let index = parseInt(checkboxId.split('-')[2]); // Get the index from the checkbox ID
+  let movie = movieArray[index]; // Retrieve selected movie from movieArray for comparison
+
+
+  // Retrieve watched movie data from local storage (if any)
+  let watchedMovies = JSON.parse(localStorage.getItem('watchedMovies')) || [];
+  watchedMovieArray = watchedMovies;
+
+  // Check if the movie from movieArray is already in watchedMovie Array
+  let existingIndex = watchedMovieArray.findIndex(item => item.movieId === movie.id);
+
+  if (event.target.checked) {
+    // If checkbox checked, add movie to watchedMovieArray if not present already
+    if (existingIndex === -1) {
+      let watchedMovieObject = new WatchedMovieData(movie.id, true);
+      watchedMovieArray.push(watchedMovieObject); //push movie object
+      console.log(watchedMovieArray);
+    } else {
+      
     }
   }
 
