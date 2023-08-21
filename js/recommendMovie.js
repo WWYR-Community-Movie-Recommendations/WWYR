@@ -3,7 +3,8 @@
 // ***** GLOBALS *****
 let userNameLocalStorage ='';
 let userArray = [];
-
+// Unique movie ID numbers, initialize counter using the value from local storage (if available), or start from 1
+let movieIdCounter = parseInt(localStorage.getItem('movieIdCounter')) || 1;
 
 // ***** DOM WINDOWS *****
 // Get form and all form data by id
@@ -24,6 +25,7 @@ function MovieData (movieName, userComment, videoLink, userName, genre) {
   this.videoLink = videoLink;
   this.userName = userName;
   this.genre = genre;
+  this.id = movieIdCounter++; // Assign current value of counter and then increment it
 }
 
 
@@ -220,6 +222,11 @@ function handleSubmit(event) {
 
   // If everything valid/correct, push movie data object to userArray.recommended movies[]
   let userMovieData = new MovieData(movieNameValue, userCommentValue, embedURL, userNameLocalStorage, genreValue);
+
+  // Save id counter to local storage, so page knows where counter left off when adding new movies to array
+  localStorage.setItem('movieIdCounter', movieIdCounter);
+
+  // Push movie data in to userArray
   userArray[userIndex].recommendedMovies.push(userMovieData);
 
   // Update local storage with the new movie data
